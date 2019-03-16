@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import Post from '../../../components/Post/Post'
 import axiosinstance from '../../../axios'
 import './Posts.css';
+import {Link} from 'react-router-dom'
+
 
 class Posts extends Component {
   state = {
@@ -34,12 +36,15 @@ class Posts extends Component {
 
   render () {
     let posts = this.state.posts.map(post => {
-      return <Post
-        title={post.title}
-        key={post.id}
-        author={post.author}
-        clicked={() => this.postClickedHandler(post.id)}
-      />
+      return (
+        <Link to={'/'+post.id} key={post.id}>
+          <Post
+            title={post.title}
+            author={post.author}
+            clicked={() => this.postClickedHandler(post.id)}
+          />
+      </Link>
+      )
     })
     return (
       <div>
