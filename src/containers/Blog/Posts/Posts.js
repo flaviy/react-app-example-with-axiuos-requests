@@ -15,6 +15,7 @@ class Posts extends Component {
   }
 
   componentDidMount () {
+    console.log(this.props);
     axiosinstance.get('/posts').then(response => {
       const posts = response.data.slice(0, 5)
       const updatedPosts = posts.map(post => {
