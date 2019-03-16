@@ -17,7 +17,7 @@ class Blog extends Component {
                       <NavLink to={{
                         pathname: '/new-post',
                         hash: 'somehash',
-                        search: 'search-phrase',
+                        search: 'search-phrase=test',
                       }}>New Post</NavLink>
                     </li>
                   </ul>
