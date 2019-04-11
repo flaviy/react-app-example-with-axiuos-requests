@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import Post from '../../../components/Post/Post'
+import FullPost from '../../Blog/FullPost/FullPost'
 import axiosinstance from '../../../axios'
 import './Posts.css';
-import {Link} from 'react-router-dom'
+import { Link, Route } from 'react-router-dom'
 
 
 class Posts extends Component {
@@ -18,7 +19,6 @@ class Posts extends Component {
   }
 
   componentDidMount () {
-    console.log(this.props);
     axiosinstance.get('/posts').then(response => {
       const posts = response.data.slice(0, 5)
       const updatedPosts = posts.map(post => {
@@ -38,17 +38,12 @@ class Posts extends Component {
   render () {
     let posts = this.state.posts.map(post => {
       return (
-        <div>
-          <Post
-            title={'programatic ' + post.title}
-            author={post.author}
-            clicked={() => this.postClickedHandler(post.id)}
-          />
-          <Link to={'/'+post.id} key={post.id}>
+        <div key={post.id}>
+          <Link to={'/'+post.id}>
             <Post
               title={post.title}
               author={post.author}
-              clicked={() => this.postClickedHandler(post.id)}
+              //clicked={() => this.postClickedHandler(post.id)}
             />
         </Link>
         </div>
@@ -59,6 +54,7 @@ class Posts extends Component {
         <section className="Posts">
           {posts}
         </section>
+        <Route path="/:postId" component={FullPost}/>
       </div>
     )
   }

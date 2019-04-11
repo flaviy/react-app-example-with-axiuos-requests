@@ -6,26 +6,32 @@ import './FullPost.css'
 class FullPost extends Component {
   state = {
     loadedPost : null,
-    selectedPostId : null
   }
 
   componentDidMount () {
-    if(this.props.match.params['postId']) {
-      this.setState({selectedPostId :this.props.match.params['postId'] })
+    this.loadPost()
+  }
+
+  componentDidUpdate () {
+    this.loadPost()
+  }
+
+  loadPost () {
+    if (this.props.match.params['postId'] && (!this.state.loadedPost || (this.state.loadedPost.id !== +this.props.match.params['postId']))) {
       axios.get('/posts/' + this.props.match.params['postId']).then(
         response => {
           this.setState({
-            loadedPost: response.data
+            loadedPost: response.data,
           })
-        }
+        },
       )
     }
   }
 
   render () {
     let post = <p style={{ textAlign: 'center' }}>Please select a Post!</p>
-    if (this.state.selectedPostId) {
-      post = <p style={{ textAlign: 'center' }}>Loading....</p>;
+    if ( this.props.match.params.id ) {
+      post = <p style={{ textAlign: 'center' }}>Loading...!</p>;
     }
     if(this.state.loadedPost) {
       post = (
