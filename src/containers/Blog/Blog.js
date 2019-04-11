@@ -25,7 +25,7 @@ class Blog extends Component {
         <Route path="/" exact render={() => <h1>home</h1>}/>
         <Switch>
           <Route path="/new-post" component={NewPost}/>
-          <Redirect from="/" to="/posts" />
+          <Redirect from="/test" to="/posts" />
           <Route path="/" component={Posts}/>
         </Switch>
       </div>
