@@ -9,7 +9,7 @@ import { Link, Route } from 'react-router-dom'
 class Posts extends Component {
   state = {
     posts: [],
-    selectedPostId: null,
+    selectedPostId: null
   }
   postClickedHandler = (postId) => {
     this.props.history.push({pathname:'/'+postId});
